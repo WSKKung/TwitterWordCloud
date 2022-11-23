@@ -1,0 +1,70 @@
+.KeywordForm {
+    display: flex;	
+	flex-direction: row;
+	align-items: center;
+	gap: 16px;
+	justify-content: center;
+
+	/* width: 500px; */
+	/* height: 64px; */
+
+	/* margin-left: auto; */
+	/* margin-right: auto; */
+	margin-top: 20px;
+}
+
+.Input{
+	background: #EFF3F4;
+	border: 2px solid #429BF1;
+	border-radius: 15px;
+	height: 48px;
+	width: 312px;
+	font-size: 16px;
+	margin-right: 12px ;
+
+	background: #ffffff;
+	box-shadow: inset 8px 8px 9px #cfcfcf,
+            	inset -8px -8px 9px #ffffff;
+}
+
+.SubBTN{
+	width: 120px;
+	height: 48px;
+	font-size: 17px;
+	color: #ffff;
+	
+	border-radius: 15px;
+	border: none;
+
+	background: linear-gradient(145deg, #3d96e9, #337ec4);
+	box-shadow:  8px 8px 16px #2e71b1,
+				 -8px -8px 16px #44a7ff;
+}
+
+.SubBTN:hover{
+	width: 120px;
+	height: 48px;
+	font-size: 17px;
+	color: #ffff;
+	
+	border-radius: 15px;
+	border: none;
+
+	background: linear-gradient(145deg, #337ec4, #3d96e9);
+	box-shadow:  8px 8px 9px #2e71b1,
+             	-8px -8px 9px #44a7ff;
+}
+
+.SubBTN:active{
+	width: 120px;
+	height: 48px;
+	font-size: 17px;
+	color: #ffff;
+	
+	border-radius: 15px;
+	border: none;
+
+	background: linear-gradient(145deg, #337ec4, #3d96e9);
+	box-shadow: inset 8px 8px 9px #2e71b1,
+				inset -8px -8px 9px #44a7ff;
+}
