@@ -25,8 +25,9 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <embed src={} loop="true" autostart="true" width="2"
-          height="0"> */}
+        {/* 
+        <embed src={} loop="true" autostart="true" width="2" height="0"> 
+          */}
         <img className='cloud1 cloud11' src={cloud2}/>
         <img className='cloud1 cloud12' src={cloud2}/>
         <img className='cloud1 cloud13' src={cloud2}/>

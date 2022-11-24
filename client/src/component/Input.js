@@ -10,12 +10,20 @@ export default class KeywordForm extends React.Component {
 		}
 	}
 
+  validateInput = () => {
+    return this.state.keywordInput.trim() !== ""
+  }
+
 	updateKeywordInput = (event) => {
 		this.setState({ keywordInput: event.target.value })
 	}
 
 	submitForm = (event) => {
-    this.props.onKeywordSubmit(event)
+    if (this.validateInput()) {
+      this.props.onKeywordSubmit(event, this.state.keywordInput)
+    } else {
+      alert("Invalid input: " + this.state.keywordInput)
+    }
 	}
 
 	render() {
@@ -28,7 +36,7 @@ export default class KeywordForm extends React.Component {
         <div className='Container'>
           <div>
             <div className='Inputheader'> KEYWORD(S) </div>
-            <form onSubmit={(event) => this.props.onKeywordSubmit(event, this.state.keywordInput)}>
+            <form onSubmit={this.submitForm}>
               <input className="Input" type="Inputheader" value={this.state.keywordInput} onChange={this.updateKeywordInput} name="keywords" />
               <input className="btnInput" type="submit" value="create" />
             </form>

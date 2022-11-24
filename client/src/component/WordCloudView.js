@@ -9,7 +9,8 @@ export default class WordCloudDisplay extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			words: []
+			words: [],
+			loading: false
 		}
 	}
 
@@ -29,19 +30,32 @@ export default class WordCloudDisplay extends React.Component {
 	};
 
 	fetchWordCount = async () => {
-		console.log("Fetching from " + this.props.keywords + "... ")
+		console.log("Fetching for " + this.props.keywords + "... ")
 		if (!this.props.keywords) return
+		this.setState({ loading: true })
 		axios.post(
 			"http://localhost:5000/api/word_cloud", 
 			{ keywords: this.props.keywords },
 			{ headers: { "Content-Type": "multipart/form-data" } }
 		).then(res => {
-			this.setState({ words: res.data })
+			this.setState({ words: res.data, loading: false })
 		})
 		
 	}
 
 	render() {
+		if (this.state.loading) {
+			return (
+				<div style={{
+					display: 'flex',
+					justifyContent: 'center',
+				}}>
+					<div style={{ width: 600, height: 600 }}>
+						Loading...
+					</div>
+				</div>
+			)
+		}
 		return (
 			<div style={{
 				display: 'flex',
@@ -54,10 +68,9 @@ export default class WordCloudDisplay extends React.Component {
 		)
 	}
 
-	componentDidUpdate(prevProps) {
+	componentDidUpdate(prevProps, prevState) {
 		if (this.props.keywords && prevProps.keywords !== this.props.keywords) {
 			this.fetchWordCount();
-			alert("Fetching " + this.props.keywords)
 		}
 	}
 
