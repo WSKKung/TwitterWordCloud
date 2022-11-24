@@ -15,7 +15,7 @@ export default class KeywordForm extends React.Component {
 	}
 
 	submitForm = (event) => {
-		event.preventDefault()
+    this.props.onKeywordSubmit(event)
 	}
 
 	render() {
@@ -28,7 +28,7 @@ export default class KeywordForm extends React.Component {
         <div className='Container'>
           <div>
             <div className='Inputheader'> KEYWORD(S) </div>
-            <form onSubmit={() => this.props.onSubmit(this.state.keywordInput)}>
+            <form onSubmit={(event) => this.props.onKeywordSubmit(event, this.state.keywordInput)}>
               <input className="Input" type="Inputheader" value={this.state.keywordInput} onChange={this.updateKeywordInput} name="keywords" />
               <input className="btnInput" type="submit" value="create" />
             </form>

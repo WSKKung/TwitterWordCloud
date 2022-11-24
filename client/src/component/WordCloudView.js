@@ -2,22 +2,10 @@ import React from "react";
 import ReactWordcloud from "react-wordcloud";
 import axios from "axios";
 
-const wordcloudOptions = {
-	colors: ["#1f77b4", "#FF0000"],
-	enableTooltip: true,
-	deterministic: true,
-	fontFamily: "impact",
-	fontSizes: [16, 128],
-	fontStyle: "normal",
-	fontWeight: "normal",
-	padding: 1,
-	rotations: 0,
-	scale: "linear",
-	spiral: "archimedean",
-	transitionDuration: 0
-  };
+
 
 export default class WordCloudDisplay extends React.Component {
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -25,34 +13,52 @@ export default class WordCloudDisplay extends React.Component {
 		}
 	}
 
-	async fetchWordCount() {
+	wordcloudOptions = {
+		colors: ["#1f77b4", "#FF0000"],
+		enableTooltip: true,
+		deterministic: true,
+		fontFamily: "impact",
+		fontSizes: [8, 100],
+		fontStyle: "normal",
+		fontWeight: "normal",
+		padding: 1,
+		rotations: 0,
+		scale: "linear",
+		spiral: "archimedean",
+		transitionDuration: 0
+	};
+
+	fetchWordCount = async () => {
 		console.log("Fetching from " + this.props.keywords + "... ")
 		if (!this.props.keywords) return
-		let res = await axios.post(
+		axios.post(
 			"http://localhost:5000/api/word_cloud", 
 			{ keywords: this.props.keywords },
 			{ headers: { "Content-Type": "multipart/form-data" } }
-		)
-		this.setState({ words: res.data })
+		).then(res => {
+			this.setState({ words: res.data })
+		})
+		
 	}
 
 	render() {
 		return (
 			<div style={{
 				display: 'flex',
-				'justify-content': 'center',
+				justifyContent: 'center',
 			}}>
-				<div className="wordCloudDisplay" style={{
-					width: 600,
-					height: 600,
-				}}>
-					<ReactWordcloud words={this.state.words} options={wordcloudOptions} />
+				<div style={{ width: 600, height: 600 }}>
+					<ReactWordcloud words={this.state.words} size={[ 600, 600 ]} options={this.wordcloudOptions} />
 				</div>
 			</div>
 		)
 	}
 
-	componentDidMount() {
-		this.fetchWordCount()
+	componentDidUpdate(prevProps) {
+		if (this.props.keywords && prevProps.keywords !== this.props.keywords) {
+			this.fetchWordCount();
+			alert("Fetching " + this.props.keywords)
+		}
 	}
+
 }
