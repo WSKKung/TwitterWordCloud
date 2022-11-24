@@ -163,6 +163,7 @@ body{
 .content{
   position: relative;
   z-index: 30;
+  text-shadow: 3px 5px 8px rgba(1, 1, 1, 0.3);
 }
 
 .cloud1{
