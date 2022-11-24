@@ -6,6 +6,7 @@ body{
   color: rgb(0, 0, 0);
   margin: 0;
   background-color: #1DA1F2;
+  overflow: hidden;
 }
 
 .App{
@@ -171,6 +172,7 @@ body{
   width: 305px;
   height: 203px;
   z-index: 0;
+  overflow: hidden;
 }
 
 .cloud2{
@@ -178,58 +180,66 @@ body{
   width: 305px;
   height: 203px;
   z-index: 0;
+  overflow: hidden;
 }
 
 .cloud11{
   right: 0px;
   top: 0%;
   animation: cloudmove2 9s linear infinite;
+  overflow: hidden;
 }
 
 .cloud12{
   left: 0px;
   top: 30%;
   animation: cloudmove1 10s linear infinite;
+  overflow: hidden;
 }
 
 .cloud13{
   left: 0px;
   top: 80%;
   animation: cloudmove1 8s linear infinite;
+  overflow: hidden;
 }
 
 .cloud14{
   right: 0px;
   top: 40%;
   animation: cloudmove2 9s linear infinite;
+  overflow: hidden;
 }
 
 .cloud15{
   left: 0px;
   top: 80%;
   animation: cloudmove1 8s linear infinite;
+  overflow: hidden;
 }
 
 @keyframes cloudmove1 {
   0%{
-    left: -10%;
+    left: -30%;
   }
   100%{
     left: 100%;
   }
   0%{
-    left: -10%;
+    left: -30%;
   }
+  
 }
 
 @keyframes cloudmove2 {
   0%{
-    right: -10%;
+    right: -30%;
   }
   100%{
     right: 100%;
   }
   0%{
-    right: -10%;
+    right: -30%;
   }
 }
+
