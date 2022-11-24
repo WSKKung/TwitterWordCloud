@@ -1,25 +1,40 @@
-import React from 'react';
-import Header from './components/Header';
-import KeywordForm from './components/KeywordForm';
-import WordCloudDisplay from './components/WordCloudDisplay';
-import "./styles/App.css"
+import React, { useState } from 'react';
 
-export default class App extends React.Component {
+import './App.css';
+import Header from './component/Header';
+import Input from './component/Input';
+import Post from './component/Output';
 
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
+let id = 1;
+
+function App() {
+  const [tags, setPosts] = useState([]);
+
+  function addPost(newPost) {
+    setPosts([{ id, title: newPost }, ...tags]);
+    id += 1;
   }
 
-  render() {
-    return (
+  
+
+  return (
+    <>
+    <div>
+      <Header/>
       <div className="App">
-        <Header/>
-        <KeywordForm />
-        <WordCloudDisplay />
+        <div className='AppContainer'>
+          <Input addPost={addPost}/>
+          {tags.map((post) => (
+          <Post
+            id={post.id}
+            title={post.title}
+          />
+            ))}
+        </div>
       </div>
-    );
-  }
-
+    </div>
+    </>
+  );
 }
+
+export default App;
