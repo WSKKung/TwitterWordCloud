@@ -1,28 +1,30 @@
 import dotenv from "dotenv"
 dotenv.config()
 
-import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb'
+import { MongoClient, ServerApiVersion } from 'mongodb'
 
 const uri = process.env.MONGODB_CONNECT_URI
 
-const tweetsId = ObjectId("637e5128a72ea89a10be6fde");
+async function connectToMongoDBClient() {
+	let client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
+	return await client.connect()
+}
 
 export async function insertTweetIntoDB(tweets) {
 
-	// insert _id for mongodb
+	// gen _id field for mongodb
 	tweets = tweets.map(twt => {
 		twt._id = twt.tweetID
 		return twt
 	})
 
-	let client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
-	client = await client.connect()
+	let client = await connectToMongoDBClient()
 	let collection = client.db("bigData").collection("tweets");
 
 	// append new tweets
 	for (let i in tweets) {
 		let existingTweet = await collection.findOne({ _id: tweets[i]._id })
-		if (existingTweet != null) continue
+		if (existingTweet != null) continue // skip duplicates
 		await collection.insertOne(tweets[i])
 	}
 
@@ -31,12 +33,13 @@ export async function insertTweetIntoDB(tweets) {
 
 export async function extractTweetFromDB(keywords) {
 
-	let client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
-	client = await client.connect()
+	let client = await connectToMongoDBClient()
 	let collection = client.db("bigData").collection("tweets");
 
 	let query = {}
-	
+
+	// build query object to scan for every docs (tweet) 
+	// whose field named 'keywords' contains every key from `keywords` parameters
 	for (let i in keywords) {
 		query['keywords.' + keywords[i]] = { $exists: true }
 	}
