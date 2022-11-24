@@ -19,6 +19,8 @@ async function fetchTweets(keywords) {
 		tweet_mode: "extended" // do not want the truncated text from tweets
 	}
 
+	console.log("fetch search tweet, q=" + query)
+
 	let tweets = await searchTweet(searchParams)
 	return tweets
 }
@@ -60,6 +62,7 @@ export function extractKeywordFromTweet(tweet) {
 export async function getWordCountFromTweets(keywords) {
 
 	try {
+		console.log("try fetching tweets from twitter api")
 		// try to fetch tweets from twitter api
 		let newTweets = await fetchTweets(keywords)
 		// transform to db entry
@@ -74,15 +77,19 @@ export async function getWordCountFromTweets(keywords) {
 			})
 		})
 		// insert into db
+		console.log("inserting new tweets into db")
 		await insertTweetIntoDB(newTweets)
 	} catch (err) {
 		// continue on error from twitter api
+		console.log("fetching tweets fail")
 		console.log(err.message)
 	}
 
+	console.log("extracting tweets from db")
 	let tweets = await extractTweetFromDB(keywords)
 
 	// Collect keywords from each tweets
+	console.log("collecting keywords from tweets")
 	let bagOfWords = new Map()
 	tweets.forEach(tweet => {
 		let curKeys = Object.keys(tweet.keywords)
