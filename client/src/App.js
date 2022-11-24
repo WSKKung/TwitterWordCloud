@@ -4,8 +4,10 @@ import './App.css';
 import WordCloudView from '../src/component/WordCloudView';
 import Input from '../src/component/Input';
 import Output from '../src/component/Output';
-// import cloud1 from './cloud1.png'
+import cloud1 from './cloud1.png'
 import cloud2 from './cloud2.png'
+import cloud3 from './cloud3.png'
+
 
 export default class App extends React.Component {
 
@@ -32,11 +34,15 @@ export default class App extends React.Component {
         <img className='cloud1 cloud12' src={cloud2}/>
         <img className='cloud1 cloud13' src={cloud2}/>
           <div className='AppContainer'>
-          <img className='cloud2 cloud14' src={cloud2}/>
-          <img className='cloud2 cloud15' src={cloud2}/>
+          <img className='cloud2 cloud14' src={cloud1}/>
+          <img className='cloud2 cloud15' src={cloud1}/>
             <div className="content">
               <Input onKeywordSubmit={this.onKeywordSubmit}/>
+              <div className="WordCloud">
+              </div>
               <WordCloudView keywords={this.state.keywordInput}/>
+              
+              
             </div>
           </div>
       </div>
