@@ -15,7 +15,7 @@ async function fetchTweets(keywords) {
 	let searchParams = {
 		q: query,
 		lang: "en",
-		count: 50,
+		count: 200,
 		tweet_mode: "extended" // do not want the truncated text from tweets
 	}
 
