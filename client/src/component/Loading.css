@@ -1,0 +1,27 @@
+.rotate {
+    animation: rotation 2s infinite linear;
+}
+
+.box{
+  width: 600;
+  height: 600;
+  z-index: 40;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+
+.img {
+  width: 180px;
+  margin-top: 8;
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+}
