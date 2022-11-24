@@ -9,12 +9,14 @@ const as = nlp.as
 
 async function fetchTweets(keywords) {
 
-	let query = keywords.concat("-is:retweet").join(" ")
+	// filter out retweets
+	let query = keywords.concat("-filter:retweets").join(" ")
 
 	let searchParams = {
 		q: query,
 		lang: "en",
-		tweet_mode: "extended"
+		count: 50,
+		tweet_mode: "extended" // do not want the truncated text from tweets
 	}
 
 	let tweets = await searchTweet(searchParams)
@@ -22,9 +24,12 @@ async function fetchTweets(keywords) {
 }
 
 export function extractKeywordFromTweet(tweet) {
+
 	let text = tweet.full_text
+
 	let doc = nlp.readDoc(text)
 	let extractedKeywords = []
+
 	doc.tokens().each(e => {
 			// filter out stopwords
 			if (e.out(its.stopWordFlag)) return
@@ -42,23 +47,40 @@ export function extractKeywordFromTweet(tweet) {
 			}
 	})
 
+	// return as bag of words object
 	return as.bow(extractedKeywords)
 }
 
+/**
+ * 
+ * @param {*} keywords 
+ * @returns 
+ */
 export async function getWordCountFromTweets(keywords) {
-	let newTweets = await fetchTweets(keywords)
-	newTweets = newTweets.map(tweet => {
-		let keywords = extractKeywordFromTweet(tweet)
-		return ({
-			tweetID: tweet.id_str,
-			userID: tweet.user.screen_name,
-			username: tweet.user.name,
-			text: tweet.full_text,
-			keywords
+
+	try {
+		// try to fetch tweets from twitter api
+		let newTweets = await fetchTweets(keywords)
+		// transform to db entry
+		newTweets = newTweets.map(tweet => {
+			let keywords = extractKeywordFromTweet(tweet)
+			return ({
+				tweetID: tweet.id_str,
+				userID: tweet.user.screen_name,
+				username: tweet.user.name,
+				text: tweet.full_text,
+				keywords
+			})
 		})
-	})
-	await insertTweetIntoDB(newTweets)
+		// insert into db
+		await insertTweetIntoDB(newTweets)
+	} catch (err) {
+		// continue on error from twitter api
+		console.log(err.message)
+	}
+
 	let tweets = await extractTweetFromDB(keywords)
+
 	// Collect keywords from each tweets
 	let bagOfWords = new Map()
 	tweets.forEach(tweet => {
@@ -68,6 +90,7 @@ export async function getWordCountFromTweets(keywords) {
 			bagOfWords.set(kw, prev + 1)
 		})
 	})
+
 	// Collect map to array
 	let wordCounts = []
 	bagOfWords.forEach((cnt, kw) => {
@@ -76,7 +99,9 @@ export async function getWordCountFromTweets(keywords) {
 			value: cnt
 		})
 	})
+
 	// sort by keyword count
 	wordCounts = wordCounts.sort((a, b) => b.value - a.value)
+
 	return wordCounts
 }
