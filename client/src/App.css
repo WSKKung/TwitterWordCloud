@@ -206,7 +206,7 @@ body{
 
 .cloud14{
   right: 0px;
-  top: 40%;
+  top: 30%;
   animation: cloudmove2 9s linear infinite;
   overflow: hidden;
 }
@@ -216,6 +216,20 @@ body{
   top: 80%;
   animation: cloudmove1 8s linear infinite;
   overflow: hidden;
+}
+
+.WordCloud{
+  width: 600px;
+  height: 600px;
+  background-color: #F2F2F2;
+  display: flex;
+  position: absolute;
+  top: 62%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  z-index: 0;
 }
 
 @keyframes cloudmove1 {
@@ -243,3 +257,22 @@ body{
   }
 }
 
+.WordCloudContainer {
+  padding: 20px;
+  width: 600px;
+  height: 600px;
+  z-index: 40;
+  text-align: center
+  /* margin-top */
+}
+
+.folder{
+  display: none;
+  /* display: flex; */
+  width: 170px; 
+  height: 170px; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
