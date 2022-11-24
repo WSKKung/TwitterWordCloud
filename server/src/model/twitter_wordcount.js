@@ -9,8 +9,11 @@ const as = nlp.as
 
 async function fetchTweets(keywords) {
 
-	// filter out retweets
-	let query = keywords.concat("-filter:retweets").join(" ")
+	// add query to filter out retweets (but not quote retweets)
+	keywords = keywords.concat("-filter:retweets")
+
+	// build query string 
+	let query = keywords.join(" ")
 
 	let searchParams = {
 		q: query,
@@ -28,6 +31,8 @@ async function fetchTweets(keywords) {
 export function extractKeywordFromTweet(tweet) {
 
 	let text = tweet.full_text
+
+	// replace ampersand markup
 	text = text.replace("&amp;", "&")
 
 	let doc = nlp.readDoc(text)
@@ -55,9 +60,9 @@ export function extractKeywordFromTweet(tweet) {
 }
 
 /**
- * 
- * @param {*} keywords 
- * @returns 
+ * Get keyword count of tweets matched by a given keywords
+ * @param {String[]} keywords 
+ * @returns {{ text: String, value: number }[]} word count object
  */
 export async function getWordCountFromTweets(keywords) {
 
