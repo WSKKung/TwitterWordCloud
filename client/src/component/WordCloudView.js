@@ -24,7 +24,7 @@ export default class WordCloudDisplay extends React.Component {
 		fontWeight: "normal",
 		padding: 1,
 		rotations: 0,
-		scale: "linear",
+		scale: "log",
 		spiral: "archimedean",
 		transitionDuration: 0
 	};
