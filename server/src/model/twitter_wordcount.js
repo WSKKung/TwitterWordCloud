@@ -26,6 +26,7 @@ async function fetchTweets(keywords) {
 export function extractKeywordFromTweet(tweet) {
 
 	let text = tweet.full_text
+	text = text.replace("&amp;", "&")
 
 	let doc = nlp.readDoc(text)
 	let extractedKeywords = []
@@ -36,8 +37,8 @@ export function extractKeywordFromTweet(tweet) {
 			switch (e.out(its.type)) {
 				// filter in only word, mentions and hashtag
 				case 'word':
-					// filter out RT message (from quoted retweet)
-					if (e.out() == 'RT') return
+					// filter out short words
+					if (e.out().length < 3) return
 					extractedKeywords.push(e.out().toLowerCase())
 					break
 				case 'hashtag':
