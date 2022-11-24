@@ -46,3 +46,12 @@ npm start
 ```
 
 *Note that you should run both server in seperate console to fully test the project functionality.*
+
+## Author
+63050108 ฉัตรณภัทร์ เศรษฐ์ณโชค
+63050176 รินรดา ละเอียด
+63050169 นายภูธเนศ  ประสิทธิ์สิน
+63050172 นายภูวสุ  ชูมณี
+63050182 นายวรภัทร  อัศวธงชัย
+63050197 นายสหชัย  แผลงฤทธิ์
+63050145 นาย ธรรมสรณ์ วิสุทธิ์เทพ
