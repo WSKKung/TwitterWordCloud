@@ -1,22 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-function Output({id, title}) {
+function Output() {
     return (
         <div className='Container'>
             <div className='box'>
-                <div className='Output_name'>{title}</div>
-                <img className='Output_image'  
-                src={`https://source.unsplash.com/random?sig=${id}`}
-                alt="image"/>
+                <div className='Output_name'>{'Word Cloud'}</div>
+                <div className='Word_cloud'>
+                    <body></body>
+                </div>
+
             </div>
         </div>
     )
 }
 
-Output.propTypes = {
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-};
 
 export default Output;

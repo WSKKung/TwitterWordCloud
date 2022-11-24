@@ -1,35 +1,28 @@
 import React, { useState } from 'react';
 
 import './App.css';
-import Header from './component/Header';
-import Input from './component/Input';
-import Post from './component/Output';
-
-let id = 1;
+// import Input from '../src/component/Input';
+import Post from '../src/component/Output';
+// import cloud1 from './cloud1.png'
+import cloud2 from './cloud2.png'
 
 function App() {
-  const [tags, setPosts] = useState([]);
-
-  function addPost(newPost) {
-    setPosts([{ id, title: newPost }, ...tags]);
-    id += 1;
-  }
-
-  
-
   return (
     <>
     <div>
-      <Header/>
+      {/* <embed src={} loop="true" autostart="true" width="2"
+         height="0"> */}
       <div className="App">
+      <img className='cloud1 cloud11' src={cloud2}/>
+      <img className='cloud1 cloud12' src={cloud2}/>
+      <img className='cloud1 cloud13' src={cloud2}/>
         <div className='AppContainer'>
-          <Input addPost={addPost}/>
-          {tags.map((post) => (
-          <Post
-            id={post.id}
-            title={post.title}
-          />
-            ))}
+        <img className='cloud2 cloud14' src={cloud2}/>
+        <img className='cloud2 cloud15' src={cloud2}/>
+          <div className="content">
+            {/* <Input/> */}
+            <Post/>
+          </div>
         </div>
       </div>
     </div>
