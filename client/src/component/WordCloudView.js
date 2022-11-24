@@ -15,7 +15,7 @@ export default class WordCloudDisplay extends React.Component {
 	}
 
 	wordcloudOptions = {
-		colors: ["#1f77b4", "#FF0000"],
+		colors: ["#38aecc", "#0090c1", "#183446", "#046e8f"],
 		enableTooltip: true,
 		deterministic: true,
 		fontFamily: "impact",
@@ -39,6 +39,9 @@ export default class WordCloudDisplay extends React.Component {
 			{ headers: { "Content-Type": "multipart/form-data" } }
 		).then(res => {
 			this.setState({ words: res.data, loading: false })
+		}).catch(err => {
+			console.log(err)
+			alert(err.message)
 		})
 		
 	}
