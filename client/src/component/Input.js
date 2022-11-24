@@ -1,4 +1,4 @@
-import "../styles/KeywordForm.css"
+
 import React from "react"
 
 export default class KeywordForm extends React.Component {
@@ -8,15 +8,13 @@ export default class KeywordForm extends React.Component {
 		this.state = {
 			keywordInput: ""
 		}
-		this.updateKeywordInput = this.updateKeywordInput.bind(this)
-		this.submitForm = this.submitForm.bind(this)
 	}
 
-	updateKeywordInput(event) {
+	updateKeywordInput = (event) => {
 		this.setState({ keywordInput: event.target.value })
 	}
 
-	submitForm(event) {
+	submitForm = (event) => {
 		event.preventDefault()
 	}
 
