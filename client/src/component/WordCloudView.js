@@ -42,22 +42,6 @@ export default class WordCloudDisplay extends React.Component {
 		transitionDuration: 0
 	};
 
-	/*fetchWordCount = async () => {
-		console.log("Fetching for " + this.props.keywords + "... ")
-		if (!this.props.keywords) return
-		this.setState({ loading: true })
-		axios.post(
-			"http://localhost:5000/api/word_cloud", 
-			{ keywords: this.props.keywords },
-			{ headers: { "Content-Type": "multipart/form-data" } }
-		).then(res => {
-			this.setState({ words: res.data, loading: false })
-		}).catch(err => {
-			console.log(err)
-			alert(err.message)
-		})
-	}*/
-
 	fetchWordCount = async () => {
         console.log("Fetching for " + this.props.keywords + "... ")
         if (!this.props.keywords) return
@@ -79,12 +63,6 @@ export default class WordCloudDisplay extends React.Component {
 		.catch(err => {
             console.log(err)
             alert(err.message)
-			// import rhyzen from 'asawaOS'
-			// import { Cat } from 'zoo'
-			// const voraphat = rhyzen()
-			// const mali = new Cat()
-			// voraphat.addChild(mali)
-			// voraphat.sendMessage("Phom ru suk cum")
             this.setState({
 				words: [], 
 				status: this.statuses.ERROR,

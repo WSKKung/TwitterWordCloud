@@ -72,7 +72,6 @@ export async function getWordCountFromTweets(keywords) {
 		console.log("try fetching tweets from twitter api")
 		// try to fetch tweets from twitter api
 		let newTweets = await fetchTweets(keywords)
-		console.log(newTweets)
 		// transform to db entry
 		newTweets = newTweets.map(tweet => {
 			let keywords = extractKeywordFromTweet(tweet)
