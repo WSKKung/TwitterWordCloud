@@ -49,7 +49,7 @@ export default class WordCloudDisplay extends React.Component {
         this.setState({ loading: true })
         // request word count from backend server
         axios.post(
-            "http://localhost:5000/api/word_cloud", 
+            "https://twitter-word-cloud-dblk.vercel.app/api/word_cloud", 
             { keywords: this.props.keywords },
             { headers: { "Content-Type": "multipart/form-data" } }
         )
